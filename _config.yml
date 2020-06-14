@@ -17,8 +17,8 @@ title: MM
 email:
 description: >- # this means to ignore newlines until "baseurl:"
   This is a blog about CyberSecurity, IoT, and various things I love to do. 
-twitter_username: null
-github_username: null
+# twitter_username: null
+github_username: Thomas-KRISTNER
 minimal_mistakes_skin: default
 search: true
 
