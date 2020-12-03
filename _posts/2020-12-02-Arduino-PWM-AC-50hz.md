@@ -17,12 +17,12 @@ On the seeeduino lotus [wiki page](https://wiki.seeedstudio.com/Seeeduino_Lotus/
 
 Let's check that directly on board:
 
-![alt text](https://github.com/tkristner/tkristner.github.io/blob/master/assets/images/ATmega328P_PWM/seeeduino_lotus_freq_01.jpg "Seeeduino Lotus 16 MHz 01")
+![alt text](assets/images/ATmega328P_PWM/seeeduino_lotus_freq_01.jpg "Seeeduino Lotus 16 MHz 01")
 
 It may seem useless to check the frequency on the quartz crystal of your board but it turns out that errors sometimes occur in the manufacturer's documentation.
 
 Double check with an oscilloscope:
-![alt text](https://github.com/tkristner/tkristner.github.io/blob/master/assets/images/ATmega328P_PWM/seeeduino_lotus_freq_02.png "Seeeduino Lotus 16 MHz 02")
+![alt text](assets/images/ATmega328P_PWM/seeeduino_lotus_freq_02.png "Seeeduino Lotus 16 MHz 02")
 
 OK 16 MHz verified !
 
@@ -102,7 +102,7 @@ The counter is then cleared at the following timer clock cycle.
 
  The figure shows fast PWM mode when OCR1A or ICR1 is used to define TOP. The TCNT1 value is in the timing diagram shown as a histogram for illustrating the single-slope operation. The diagram includes non-inverted and inverted PWM outputs. The small horizontal line marks on the TCNT1 slopes represent compare matches between OCR1x and TCNT1. The OC1x interrupt flag will be set when a compare match occurs.
 
-![alt text](https://github.com/tkristner/tkristner.github.io/blob/master/assets/images/ATmega328P_PWM/ATmega328P_Fast-PWM.png)
+![alt text](assets/images/ATmega328P_PWM/ATmega328P_Fast-PWM.png)
 
 Using the ICR1 register for defining TOP works well when using fixed TOP values. By using ICR1, the OCR1A register is free to be used for generating a PWM output on OC1A.
 
@@ -110,7 +110,7 @@ In fast PWM mode, the compare units allow generation of PWM waveforms on the OC1
 
 The PWM frequency for the output can be calculated by the following equation:
 
-![alt text](https://github.com/tkristner/tkristner.github.io/blob/master/assets/images/ATmega328P_PWM/ATmega328P_Fast-PWM-freq.png)
+![alt text](assets/images/ATmega328P_PWM/ATmega328P_Fast-PWM-freq.png)
 
 The N variable represents the prescaler divider (1, 8, 64, 256, or 1024).
 The extreme values for the OCR1x register represents special cases when generating a PWM waveform output in the fast PWM mode. If the OCR1x is set equal to BOTTOM (0x0000) the output will be a narrow spike for each TOP+1 timer clock cycle. Setting the OCR1x equal to TOP will result in a constant high or low output (depending on the polarity of the output set by the COM1x1:0 bits.)
@@ -126,19 +126,19 @@ The COM1A1:0 and COM1B1:0 control the output compare pins (OC1A and OC1B respect
 
 When the OC1A or OC1B is connected to the pin, the function of the COM1x1:0 bits is dependent of the WGM13:0 bits setting.
 
-![alt text](https://github.com/tkristner/tkristner.github.io/blob/master/assets/images/ATmega328P_PWM/ATmega328P_Compare-Output-Mode.png)
+![alt text](assets/images/ATmega328P_PWM/ATmega328P_Compare-Output-Mode.png)
 
 If we refer to what I observed with an osciloscope and what is wrote in section "15.9.3 Fast PWM mode". Seem that there is a typo in the Microchip ATmega328P datasheet...
 
 * TCCR1A WGM11:0 bits (TCCR1A register) combined with the WGM13:2 bits found in the TCCR1B register, these bits control the counting sequence of the counter, the source for maximum (TOP) counter value, and what type of waveform generation to be used.
 
-![alt text](https://github.com/tkristner/tkristner.github.io/blob/master/assets/images/ATmega328P_PWM/ATmega328P_waveform-generation-mode-bit-desc.png)
+![alt text](assets/images/ATmega328P_PWM/ATmega328P_waveform-generation-mode-bit-desc.png)
 
 * TCCR1B Bit 4:3 – WGM13:2: Waveform Generation Mode. See TCCR1A WGM11:0 register description.
 
 * TCCR1B Bit 2:0 – CS12:0: Clock Select
 
-![alt text](https://github.com/tkristner/tkristner.github.io/blob/master/assets/images/ATmega328P_PWM/ATmega328P_Clock-select.png)
+![alt text](assets/images/ATmega328P_PWM/ATmega328P_Clock-select.png)
 
 
 Now we got everything we need !
@@ -202,10 +202,10 @@ OCR1B = 6250 // 100%
 
 Check measurements I've done with my osciloscope:
 
-![alt text](https://github.com/tkristner/tkristner.github.io/blob/master/assets/images/ATmega328P_PWM/ATmega328P_2.5hz-pwm-dc-20.png)
+![alt text](assets/images/ATmega328P_PWM/ATmega328P_2.5hz-pwm-dc-20.png)
 
-![alt text](https://github.com/tkristner/tkristner.github.io/blob/master/assets/images/ATmega328P_PWM/ATmega328P_2.5hz-pwm-dc-50.png)
+![alt text](assets/images/ATmega328P_PWM/ATmega328P_2.5hz-pwm-dc-50.png)
 
-![alt text](https://github.com/tkristner/tkristner.github.io/blob/master/assets/images/ATmega328P_PWM/ATmega328P_2.5hz-pwm-dc-75.png)
+![alt text](assets/images/ATmega328P_PWM/ATmega328P_2.5hz-pwm-dc-75.png)
 
-![alt text](https://github.com/tkristner/tkristner.github.io/blob/master/assets/images/ATmega328P_PWM/ATmega328P_2.5hz-pwm-dc-90.png)
+![alt text](assets/images/ATmega328P_PWM/ATmega328P_2.5hz-pwm-dc-90.png)
